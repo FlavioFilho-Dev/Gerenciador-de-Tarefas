@@ -1,38 +1,324 @@
-.App {
-  text-align: center;
+/* --- Estilos do Corpo (Body) para o Fundo --- */
+body {
+    margin: 0;
+    padding: 30px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* APLICAÇÃO DO FUNDO: Cor sólida cinza claro, sem imagem */
+    background-color: #f0f2f5; 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* --- Layout Principal --- */
+.task-manager-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto; 
   min-height: 100vh;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1c1e21;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #606770;
+  font-size: 1rem;
+}
+
+/* Garante que os cartões permaneçam brancos e legíveis */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 20px;
+}
+
+/* --- Adicionar Tarefa --- */
+.add-task-section form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+
+.task-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: #4267b2;
+  box-shadow: 0 0 0 1px #4267b2;
+}
+
+.controls-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.priority-select {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  flex-grow: 1;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #4267b2; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 5px;
+}
+
+.add-button:hover:not(:disabled) {
+  background-color: #365899;
+}
+
+.add-button:disabled {
+  background-color: #a8a8a8;
+  cursor: not-allowed;
+}
+
+/* --- Filtro --- */
+.filter-sort-section {
+  padding: 15px 20px;
+}
+
+.group-title {
+  font-weight: 600;
+  color: #1c1e21;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+/* Estilização do ícone SVG de filtro usando mask-image */
+.icon-filter {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #606770; 
+    mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    transition: background-color 0.2s;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.button-pill {
+  padding: 8px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 20px; 
+  background-color: #f7f7f7;
+  color: #606770;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.button-pill:hover {
+  background-color: #e9ecef;
+}
+
+/* Estilo para o botão ativo */
+.button-pill.active {
+  background-color: #4267b2;
   color: white;
+  border-color: #4267b2;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
+
+/* --- Lista de Tarefas --- */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid; 
+  transition: all 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Cores da Borda de Prioridade */
+.priority-danger { border-left-color: #dc3545; }   
+.priority-warning { border-left-color: #ffc107; }  
+.priority-success { border-left-color: #28a745; }  
+
+.task-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.task-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Estilização do checkbox customizado */
+.task-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.task-checkbox:checked {
+    border-color: #28a745;
+    background-color: #28a745;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.task-text {
+    transition: text-decoration 0.2s, color 0.2s;
+}
+
+.task-card.completed .task-text {
+    text-decoration: line-through;
+    color: #8d949e;
+}
+
+/* --- Ações da Tarefa --- */
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.priority-tag {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: default;
+    user-select: none;
+}
+
+/* Cores do Tag de Prioridade */
+.priority-tag.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.priority-tag.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+.priority-tag.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Estilização do ícone SVG de lixeira usando mask-image */
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: transparent; 
+    transition: color 0.2s;
+    font-size: 1rem;
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-trash {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #8d949e; 
+    mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    transition: background-color 0.2s;
+}
+
+.delete-button:hover .icon-trash {
+    background-color: #dc3545; 
+}
+
+.no-tasks {
+  text-align: center;
+  color: #999;
+  margin-top: 30px;
+  padding: 15px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  background-color: #fff;
 }
