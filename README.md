@@ -56,6 +56,8 @@ Você precisa ter o **Node.js** e o **npm** (ou Yarn) instalados em seu sistema.
 
 O aplicativo será aberto automaticamente no seu navegador em `http://localhost:3000`.
 
+<img width="506" height="620" alt="image" src="https://github.com/user-attachments/assets/ce08777d-de63-4e94-98ea-43961c0c758c" />
+
 ## 🤝 Contribuição
 
 Contribuições são bem-vindas! Se você encontrar um bug ou tiver uma sugestão de recurso, sinta-se à vontade para abrir uma *Issue* ou enviar um *Pull Request*.
